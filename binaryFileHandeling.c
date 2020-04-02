@@ -103,6 +103,6 @@ int main()
         else if(c!=3)                                                 //If choiceis neither 1, 2 or 3
             printf("Invalid Input. Please Try Again.\n\n");
     }
-    printf("\nThank You.\n");                                         //At choice = 3
+    printf("\nThank You.\n");
     return 0;
 }
