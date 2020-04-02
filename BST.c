@@ -32,6 +32,39 @@ int insertion(BST **aah, int n){
     return insertion(&((*aah)->right), n);
 }
 
+
+int nonRecursiveInsertion(BST **aah, int n){
+    BST *t, *cur, *parent;
+    t = (BST *)malloc(sizeof(BST));
+    if(t==NULL){
+        printf("Memory Allocation Failure!");
+        return ERR;
+    }
+    t->data = n;
+    t->left = NULL;
+    t->right = NULL;
+
+    parent = NULL;
+    cur = *aah;
+    while(cur!=NULL){
+        parent = cur;
+        if(cur->data < n)
+            cur = cur->right;
+        else
+            cur = cur->left;
+    }
+    if(parent == NULL)
+        *aah = t;
+    else{
+        if(parent->data < n)
+            parent->right = t;
+        else
+            parent->left = t;
+    }
+    return 0;
+}
+
+
 void inorder(BST *ah){
     if(ah==NULL)
         return;
@@ -52,6 +85,55 @@ void preorder(BST *ah){
     printf("%3d, ", ah->data);
     preorder(ah->left);
     preorder(ah->right);
+}
+
+void nonrecursive_inorder (BST *ar)
+{
+    int top=-1;
+    BST *stk[MAX];
+    while(1)
+    {
+        while(ar)
+        {
+            if(top==MAX-1)
+            {
+                printf("Overflow!\n");
+                exit(1);
+            }
+            stk[++(top)]=ar;
+            ar= ar->left;
+        }
+        if(top!=-1)
+        {
+            printf ("%3d, ",stk[top]->data);
+            ar=stk[top--]->right;
+        }
+        else
+            break;
+    }
+}
+void nonrecursive_preorder (BST *ar)
+{
+    int top=-1;
+    BST *stk[MAX];
+    while(1)
+    {
+        while(ar)
+        {
+            printf ("%3d, ",ar->data);
+            if(top==MAX-1)
+            {
+                printf("Overflow!\n");
+                exit(1);
+            }
+            stk[++(top)]=ar;
+            ar= ar->left;
+        }
+        if(top!=-1)
+            ar=stk[top--]->right;
+        else
+            break;
+    }
 }
 
 BST** searching(BST *node, BST *parent, int n){

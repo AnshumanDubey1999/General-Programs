@@ -47,8 +47,10 @@ int bellmanFord(struct Graph* graph, int source){
         u = graph->edge[i].u;
         v = graph->edge[i].v;
         w = graph->edge[i].w;
-        if (distance[u] + w < distance[v])
+        if (distance[u] + w < distance[v]){
             printf("This graph contains negative edge cycle\n");
+            return 0;
+        }
     }
 
     displaySolution(distance, V, source);
