@@ -6,13 +6,13 @@
 int **graph, *visited, v;
 char *vertexID;
 
-int DFS(int **graph, int v, int current, char *vertexID, int *visited){
+int DFS(int current){
+    printf("%c, ", vertexID[current]);
 	int i;
     visited[current]=1;
-    printf("%c, ", vertexID[current]);
     for (i=0;i<v;i++)
         if(graph[current][i]!=0 && graph[current][i]!=INFINITY && visited[i]==0)
-            DFS(graph, v, i, vertexID, visited);
+            DFS(i);
 }
 
 
@@ -29,8 +29,7 @@ int setAdgecencyMatrix(int **adj, int edges, int vertices, int isBiDirectional){
 }
 
 int main() {
-	int **graph, i,j,v ,e,s, bi, *visited;
-	char *vertexID;
+	int  i,j ,e,s, bi;
 	printf("Number of vertices: ");
 	scanf("%d%*c",&v);
 	vertexID = (char *)malloc(sizeof(char)*v);
@@ -59,7 +58,7 @@ int main() {
 	printf("Enter 2 vertices each edge:\n");
 	setAdgecencyMatrix(graph, e ,v, bi);
     printf("Graph Traversal in DFS order: ");
-	DFS(graph, v, 0, vertexID, visited); 
+	DFS(0); 
     printf("\n");
 	return 0; 
 } 
