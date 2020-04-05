@@ -62,3 +62,19 @@ int main() {
     printf("\n");
 	return 0; 
 } 
+
+
+/*
+                            ALGORITHM
+Step 1: Start
+Step 2: V is the number of vertices, visited[V] is array containing all 0's, graph[V][V] is the adjacency matrix of the graph and s is an Empty Stack Data Structure.
+Step 3: Push 0 in s
+Step 4: Set visited[0]=1
+Step 5: If s is not empty go to next step, else go to step 6.
+        Step 5.1:   Set Integer p = pop(s) and i = 0
+        Step 5.2:   Print p
+        Step 5.3:   If i<V, go to next step, else go to step 5
+                Step 5.31:  If graph[p][i]!=0 and graph[p][i]!=INFINITY and visited[i]==0, Push i in s and set visited[i]=1
+                Step 5.32:  Increase i by 1 and go to step 5.3
+Step 6: Stop
+*/
