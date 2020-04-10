@@ -22,4 +22,36 @@ class sort
             l--;
         }
     }
+
+    void merge(int arr[], int l, int m, int u){
+        int[] A = new int[u-l+1];
+        int i, j, k;
+
+        i = l;
+        j = m+1;
+        k = 0;
+        while((i <= m) && (j <= u)){
+            if(arr[i]<arr[j])
+                A[k++] = arr[i++];
+            else
+                A[k++] = arr[j++];
+        }
+
+        while(i <= m)
+            A[k++] = arr[i++];
+        while(j <= u)
+            A[k++] = arr[j++];
+
+        for(i = l; i <= u; i++)
+            arr[i] = A[i-l];
+    }
+
+    void mergeSort(int arr[], int i, int j){
+        int mid = (i+j)/2;
+        if(i<j){
+            mergeSort(arr, i , mid);
+            mergeSort(arr, mid+1, j);
+            merge(arr, i, mid, j);
+        }
+    }
 }
