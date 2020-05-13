@@ -27,17 +27,22 @@ int isPlacable(int *positions, int row, int column){
 }
 
 int getPosition(int *positions, int depth, int size){
-	if(depth == size)
+	if(depth == size){
+		//printf("\nRequired Arrangement: \n");
+		//display(positions, size);
 		return 1;
+	}
 	int found = 0, i;
 	for(i = 0; i < size; i++){
 		if(!isPlacable(positions, depth, i))
 			continue;
 		positions[depth] = i;
-		found = getPosition(positions, depth + 1, size);
+		if(getPosition(positions, depth + 1, size))
+			found = 1;
 		if(found)
-			return 1;
+		 	return 1;
 	}
+	//return found;
 	return 0;
 }
 
@@ -58,7 +63,7 @@ void main(){
 	if(!found)
 		printf("No such Arrangement Possible.\n");
 	else{
-		printf("Required Arrangement: \n");
+		printf("\nRequired Arrangement: \n");
 		display(positions, n);
 	}
 	return;
