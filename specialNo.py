@@ -79,7 +79,7 @@ def rec(depth, num, freq):
             return True
         freq[i]-=1
         
-    if(depth!=freq[depth]):
+    if(depth!=initialFreq):
         num[depth]=depth
         freq[depth] = depth - 1 - initialFreq
         if rec(depth-1, num, freq):

@@ -4,3 +4,5 @@
 *.class
 a.out
 hello.c
+hello
+./a.out
