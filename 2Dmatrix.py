@@ -18,3 +18,4 @@ for i in range(size):                         #print
 		print(matrix[i][j], end = " " if j < (size-1) else "")
 	if(i < (size-1)):
 		print()
+

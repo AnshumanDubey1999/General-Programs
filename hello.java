@@ -1,98 +1,47 @@
 import java.io.*;
 
 
-public class nptel6 {
+public class hello {
     static Reader sc;
     static Printer out;
-    static int distributions[], distributionIndexes[];
-    static long totalSum;
+    static long visited[][];
+    static int n;
 
     public static void main(String[] args) throws IOException {
         sc = new Reader();
         out = new Printer();
-        int testCases, m, k, b[];
-        long sum;
-        double optimalValue;
-        testCases = 1;
+        int testCases = sc.nextInt();
         while (testCases-- > 0) {
-            m = sc.nextInt();
-            k = sc.nextInt();
-            b = new int[m];
-            distributions = new int[k];
-            distributionIndexes = new int[k];
-            sum = 0l;
-            for (int i = 0; i < m; i++) {
-                b[i] = sc.nextInt();
-                sum += b[i];
-            }
-            totalSum = sum;
-            optimalValue = 1.0*sum/k;
-            for (int i = 0, j = 0; i < k && j<m;i++) {
-                //System.out.println(i+" "+optimalValue+" "+sum);
-                for (; j < m; j++) {
-                    if((distributions[i] + b[j])>optimalValue && i!=k-1)
-                        break;
-                    distributions[i]+=b[j];
-                    //PRINT.ArrayHorizontally(distributions);
-                }
-                distributionIndexes[i] = j;
-                sum -=distributions[i];
-                optimalValue = 1.0*sum/(k-i-1);
-            }
-            PRINT.ArrayHorizontally(distributions);
-            PRINT.ArrayHorizontally(distributionIndexes);
-            findOptimumCombination(b, k, 0);
-            for (int i = 0, j = 0; i < m; i++) {
-                out.print(b[i]);
-                if(i==(m-1))
-                    out.print("\n");
-                else if(j<(k - 1)&& (i+1)==distributionIndexes[j]){
-                    out.print(" / ");
-                    j++;
-                }
-                else
-                    out.print(" ");
-            }
+            n = sc.nextInt();
+            visited = new long[n+1][n+1];
+            findPaths(0,0);
+            System.out.println("Total Paths = " + visited[0][0]);
+            // for(int i = 0; i <= n; i++){
+            //     for(int j = 0; j <= n; j++)
+            //         System.out.print(visited[i][j]+"\t");
+            //     System.out.println();
+            // }
+
         }
 
         out.close();
     }
 
-    private static void findOptimumCombination(int[] b, int k, int number) {
-        System.out.println("Recursion: "+number);
-        int currentMax = maxIndex(), m1 = Integer.MAX_VALUE, m2 = Integer.MAX_VALUE;
-        //LeftSide
-        if(currentMax>0 && (distributions[currentMax-1]+b[distributionIndexes[currentMax-1]])<distributions[currentMax])
-            m1 = distributions[currentMax-1]+b[distributionIndexes[currentMax-1]];
-        //RightSide
-        if(currentMax<(k-1) && (distributions[currentMax+1]+b[distributionIndexes[currentMax]-1])<distributions[currentMax])
-            m2 = distributions[currentMax+1]+b[distributionIndexes[currentMax]-1];
-        if(m1==m2 && m2==Integer.MAX_VALUE)
+    static void findPaths(int x, int y){
+        if(visited[x][y] != 0)
             return;
-        else if(m1<=m2){
-            distributions[currentMax-1] += b[distributionIndexes[currentMax-1]];
-            distributions[currentMax] -= b[distributionIndexes[currentMax-1]+1];
-            distributionIndexes[currentMax-1]++;
+        if(x == n && y==n){
+            visited[x][y] = 1l;
+            return;
         }
-        else{
-            distributions[currentMax+1] += b[distributionIndexes[currentMax]-1];
-            distributions[currentMax] -= b[distributionIndexes[currentMax]-1];
-            distributionIndexes[currentMax]--;
+        if(x!=n){
+            findPaths(x+1,y);
+            visited[x][y]+=(long)visited[x+1][y];
         }
-        PRINT.ArrayHorizontally(distributions);
-        PRINT.ArrayHorizontally(distributionIndexes);
-        findOptimumCombination(b, k, number+1);
-    }
-
-    private static int maxIndex() {
-        int max = distributions[0], maxIndex = 0;
-        for (int i = 1; i < distributions.length; i++) {
-            if(distributions[i]>max){
-                max = distributions[i];
-                maxIndex = i;
-            }
+        if(y!=n){
+            findPaths(x,y+1);
+            visited[x][y]+=(long)visited[x][y+1];
         }
-        return maxIndex;
     }
 
 

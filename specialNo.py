@@ -57,8 +57,10 @@ import time
 #     freq[depth] = initialFreq
 #     return False
 
+count = 0
 def rec(depth, num, freq):
     # print('Depth: ', depth, num, freq)
+    global count
     if(depth==0):
         num[0]=freq[0];
         freq[0]=0;
@@ -67,6 +69,7 @@ def rec(depth, num, freq):
             if i != 0:
                 freq[0]=num[0]
                 freq[num[0]]+=1
+                count +=1
                 return False
         return True
     initialFreq = freq[depth]
@@ -95,12 +98,14 @@ def rec(depth, num, freq):
             freq[i]+=1
         
     freq[depth] = initialFreq
+    count+=1
     return False
 
     
 
 
 def main():
+    global count
     print("Enter the number of digits: ", end='')
     n = int(input())
     start = time.time()
@@ -108,11 +113,12 @@ def main():
     freq = [0]*n
     # if rec(0,num,freq):
     if rec(n-1,num,freq):
+        print('Special Number: ', end='')
         for i in num:
-            print(i, end='')
-        print()
+            print(i,  end='')
+        print('\nWrong Predictions:',count)
     else:
-        print("No such number exists.")
+        print("No such number exists.\nWrong Predictions:",count)
     end = time.time()
     print('Time Taken(seconds): ' ,(end-start))
 
