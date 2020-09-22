@@ -28,13 +28,13 @@ n1, n2 = input().split()
 n1 = int(n1)
 n2 = int(n2)
 
-p1 = list(filter(lambda i: isPrime[i], (i for i in range(n1,n2+1))))
+p1 = list(filter(lambda i: isPrime[i], (i for i in range(n1,n2))))
 t = combine2(p1)
 p2 = set(filter(lambda i: isPrime[i], t))
 l = len(p2)-2
 a = min(p2)
 b = max(p2)
-print(p1,p2,l,a,b)
+# print(p1,t,p2,l,a,b)
 while l > 0:
 	c = a+b
 	a = b

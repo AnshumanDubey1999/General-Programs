@@ -111,9 +111,10 @@ def getIsPrime(n):
 				isPrime[i] = False
 		p +=1
 
-	return isPrime
-def getPrimes(n):
-	isPrime = getIsPrime(n)
+	return isPrime              #n is sent as prime!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+def getPrimes(n, isPrime = []):
+	if isPrime == []:
+		isPrime = getIsPrime(n)
 
 	c = 0
 	for i in range(n+1):
@@ -384,25 +385,45 @@ def allValuesInRange(l, u, f):
 
 
 def main():
+	n = int(input())
+	start = time.time()
+	a = getIsPrime(1000000)
+	b = getPrimes(1000000, a)
+	s = 5
+	c = 1
+	i = 2
+	x = [5]
+	while i<len(b):
+		s+=b[i]+b[i+1]
+		i+=2
+		if s>n:
+			break
+		# if s < 1000000:
+		# 	if a[s]:
+		# 		# print(i,s)
+		# 		c+=1
+		if isPrime(s):
+			# print(i,s)
+			c+=1
+			x.append(s)
+
+	print(x)
+	print(c)
+
+
+	end = time.time()
+	print('Time Taken(seconds): ' ,(end-start))
+
+def main():
+	n = int(input())
 	start = time.time()
 	
-	func = [triNum, sqNum,pentaNum, hexaNum, heptaNum, octaNum]
-	tri =  allValuesInRange(1000,10000,triNum)
-	sq =   allValuesInRange(1000,10000,sqNum)
-	pen =  allValuesInRange(1000,10000,pentaNum)
-	hexa = allValuesInRange(1000,10000,hexaNum)
-	hept = allValuesInRange(1000,10000,heptaNum)
-	octa = allValuesInRange(1000,10000,octaNum)
-
-	for f in func:
-		print(len(allValuesInRange(1000,10000,f)))
-
-
-
-
-
-
-
+	c = 0
+	for i in x:
+		if i>n:
+			break
+		c+=1
+	print(c)
 
 	end = time.time()
 	print('Time Taken(seconds): ' ,(end-start))
@@ -412,4 +433,4 @@ def main():
 
 
 
-main()
+#
