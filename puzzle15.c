@@ -57,6 +57,7 @@ NODE dequeue(HEAP *heap){
   heap->arr[0] = heap->arr[heap->size-1];
   heap->size-=1;
   heapifyDown(heap, 0);
+  return t;
 }
 
 void display(NODE node){

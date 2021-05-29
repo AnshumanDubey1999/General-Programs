@@ -1,34 +1,20 @@
 import java.util.*;
-import java.lang.*;
-import java.io.*;
 
-class Main {
-	public static void main (String[] args) {
-	   Scanner myObj2 = new Scanner(System.in);
-	   int i = myObj2.nextInt();
-	   while(i>0){
-	       System.out.println(kadane());
-	       i--;
-	   }
-	}
-	    static int kadane(){
-	    int j;
-	    Scanner myObj = new Scanner(System.in);
-	    int N = myObj.nextInt();
-	    int[] arr = new int[N];
-	    for(j=0;j<N;j++){
-	        arr[j] = myObj.nextInt();
-	    }
-	    int max_over = Integer.MIN_VALUE,max_local=0;
-	    for(int i=0;i<N;i++){
-	        max_local=max_local + arr[i];
-	        if(max_over < max_local){
-	            max_over=max_local;
-	        }
-	        if(max_local<0){
-	            max_local=0;
-	        }
-	    }
-	    return max_over;
-	}
+public class abc{
+    public static void main(String args[]){
+        int a,b;
+        Scanner sc = new Scanner(System.in);
+        a = sc.nextInt();
+        b = sc.nextInt();
+        int arr[][] = new int[a][b];
+        for(int i = 0; i &lt; a; i++){
+            for(int j = 0; j&lt; b; j++)
+                arr[i][j]=sc.nextInt();
+        }
+        for(int i = 0; i &lt; a; i++){
+            for(int j = b-1; j&gt;=0; j--)
+                System.out.print(arr[i][j]+" ");
+            System.out.println();
+        }
+    }
 }
