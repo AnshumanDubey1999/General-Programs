@@ -138,18 +138,23 @@ def isCircularPrime(n, primes):
             return False
         n = (n%10)*(10**size)+n//10
     return True
-def isTruncatedPrime(n, primes):
+def isTruncatedPrime(n, isPrime):
+    if not isPrime[n]:
+        return False
     x = n
     while x!=0:
-        if x not in primes:
+        if not isPrime[x]:
+            # print(x, n, "Line 145")
             return False
         x//=10
 
-    x = nod(n)-1
-    while x>=0:
-        if n not in primes:
+    y = n
+    x = nod(n)
+    while x>0:
+        if not isPrime[n]:
+            # print(n, y, "Line 152")
             return False
-        n %= 10**x
+        n %= 10**(x-1)
         x-=1
     return True
 def getPrimeFactors(n, repeat=False, dp={}):
@@ -415,22 +420,22 @@ def main():
     print('Time Taken(seconds): ' ,(end-start))
 
 def main():
-    n = int(input())
+    # n = int(input())
     start = time.time()
-    
+    isPrime = getIsPrime(10000000)
     c = 0
-    for i in x:
-        if i>n:
-            break
-        c+=1
-    print(c)
+    n = 2
+    # print(isPrime[:10])
+    while n <10000000:
+        if isTruncatedPrime(n, isPrime):
+            print(n)
+        n+=1
+    
 
     end = time.time()
     print('Time Taken(seconds): ' ,(end-start))
 
 
 
-
-
-
+main()
 #
